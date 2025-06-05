@@ -16,14 +16,12 @@ function App() {
       <Navbar />
 
       {isHomePage ? (
-        // Para la página de inicio, no usar container
         <main className="flex-grow-1">
           <Routes>
             <Route path="/" element={<Inicio />} />
           </Routes>
         </main>
       ) : (
-        // Para las demás páginas, usar container normal
         <main className="container my-4 flex-grow-1">
           <Routes>
             <Route path="/menu" element={<Menu />} />
