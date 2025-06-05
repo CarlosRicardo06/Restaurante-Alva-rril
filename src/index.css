@@ -88,16 +88,6 @@
   background-color: #a34700;
   color: white;
   padding: 15px 0;
-  transition: all 0.3s ease;
-}
-
-.footer-bar i {
-  margin-right: 5px;
-  transition: transform 0.3s ease;
-}
-
-.footer-bar div:hover i {
-  transform: scale(1.2);
 }
 
 #title {
