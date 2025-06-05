@@ -1,58 +1,60 @@
-import { useEffect, useRef } from "react"
+import { useEffect } from "react";
 
 const productos = [
   {
     titulo: "Costilla BBQ",
-    descripcion: "Costilla de cerdo bañada en salsa BBQ, servida con papas crocantes y ensalada fresca.",
+    descripcion:
+      "Costilla de cerdo bañada en salsa BBQ, servida con papas crocantes y ensalada fresca.",
     precio: 20000,
-    imagen: "/img/img1.jpg",
+    imagen: import.meta.env.BASE_URL + "img/img1.jpg", // Usa BASE_URL
   },
   {
     titulo: "Chicharrón",
-    descripcion: "Crujiente chicharrón tradicional con yuca y salsa de la casa.",
+    descripcion:
+      "Crujiente chicharrón tradicional con yuca y salsa de la casa.",
     precio: 22000,
-    imagen: "/img/img3.jpg",
+    imagen: import.meta.env.BASE_URL + "img/img3.jpg", // Usa BASE_URL
   },
   {
     titulo: "Bondiola",
-    descripcion: "Jugosa bondiola de cerdo con papas a la francesa y salsa chimichurri.",
+    descripcion:
+      "Jugosa bondiola de cerdo con papas a la francesa y salsa chimichurri.",
     precio: 15000,
-    imagen: "/img/img6.jpg",
+    imagen: import.meta.env.BASE_URL + "img/img6.jpg", // Usa BASE_URL
   },
   {
     titulo: "Picada Mixta",
-    descripcion: "Combinación de bondiola, chicharrón, chorizo, papas a la francesa y salsa de la casa",
+    descripcion:
+      "Combinación de bondiola, chicharrón, chorizo, papas a la francesa y salsa de la casa",
     precio: 25000,
-    imagen: "/img/img8.jpg",
+    imagen: import.meta.env.BASE_URL + "img/img8.jpg", // Usa BASE_URL
   },
-]
+];
 
 const Menu = () => {
-  const cardsRef = useRef([])
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("visible")
+            entry.target.classList.add("visible");
           }
-        })
+        });
       },
-      { threshold: 0.1 },
-    )
+      { threshold: 0.1 }
+    );
 
-    const cards = document.querySelectorAll(".fade-in")
+    const cards = document.querySelectorAll(".fade-in");
     cards.forEach((card) => {
-      observer.observe(card)
-    })
+      observer.observe(card);
+    });
 
     return () => {
       cards.forEach((card) => {
-        observer.unobserve(card)
-      })
-    }
-  }, [])
+        observer.unobserve(card);
+      });
+    };
+  }, []);
 
   return (
     <section className="container my-5">
@@ -81,7 +83,9 @@ const Menu = () => {
                   <div className="card-body d-flex flex-column h-100">
                     <h5 className="card-title">{producto.titulo}</h5>
                     <p className="card-text">{producto.descripcion}</p>
-                    <p className="fw-bold text-warning mt-auto">${producto.precio.toLocaleString()}</p>
+                    <p className="fw-bold text-warning mt-auto">
+                      ${producto.precio.toLocaleString()}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -90,7 +94,7 @@ const Menu = () => {
         ))}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;
