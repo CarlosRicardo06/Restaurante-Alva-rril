@@ -30,7 +30,7 @@ const Inicio = () => {
     <section id="inicio" className="hero-section text-center text-white">
       <div className="container">
         <h1 className="display-1 fw-bold mb-4 fade-in">Asados Alva-rril</h1>
-        <p className="lead fs-3 mb-5 fw-bold fade-in">La mejor experiencia de asados en Bijao, Córdoba</p>
+        <p className="lead fs-3 mb-5 fw-bold fade-in">La mejor experiencia de asados en Puerto Libertador (Bijao), Córdoba</p>
         <Link to="/menu" className="btn fade-in btn-pulse">
           Ver Menú
         </Link>

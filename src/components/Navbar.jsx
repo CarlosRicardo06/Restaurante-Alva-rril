@@ -1,8 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const navbarCollapseRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +21,17 @@ function Navbar() {
     };
   }, []);
 
+  const closeNavbar = () => {
+    if (navbarCollapseRef.current && navbarCollapseRef.current.classList.contains('show')) {
+      navbarCollapseRef.current.classList.remove('show');
+      
+      const togglerButton = document.querySelector('.navbar-toggler');
+      if (togglerButton) {
+        togglerButton.setAttribute('aria-expanded', 'false');
+      }
+    }
+  };
+
   return (
     <nav
       className={`navbar navbar-expand-lg navbar-light navbar-custom sticky-top ${
@@ -27,7 +39,8 @@ function Navbar() {
       }`}
     >
       <div className="container">
-        <Link className="navbar-brand" to="/">
+        {/* Aquí puedes mantener el comentario así, fuera del atributo */}
+        <Link className="navbar-brand" to="/" onClick={closeNavbar}> 
           Asados Alva-rril
         </Link>
         <button
@@ -35,10 +48,13 @@ function Navbar() {
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className="collapse navbar-collapse" id="navbarNav" ref={navbarCollapseRef}>
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <NavLink
@@ -46,6 +62,7 @@ function Navbar() {
                   `nav-link ${isActive ? "active" : ""}`
                 }
                 to="/"
+                onClick={closeNavbar} 
               >
                 Inicio
               </NavLink>
@@ -56,6 +73,7 @@ function Navbar() {
                   `nav-link ${isActive ? "active" : ""}`
                 }
                 to="/menu"
+                onClick={closeNavbar}
               >
                 Menú
               </NavLink>
@@ -66,6 +84,7 @@ function Navbar() {
                   `nav-link ${isActive ? "active" : ""}`
                 }
                 to="/nosotros"
+                onClick={closeNavbar}
               >
                 Nosotros
               </NavLink>
@@ -76,6 +95,7 @@ function Navbar() {
                   `nav-link ${isActive ? "active" : ""}`
                 }
                 to="/ubicacion"
+                onClick={closeNavbar}
               >
                 Ubicación
               </NavLink>
@@ -86,6 +106,7 @@ function Navbar() {
                   `nav-link ${isActive ? "active" : ""}`
                 }
                 to="/contacto"
+                onClick={closeNavbar}
               >
                 Contacto
               </NavLink>

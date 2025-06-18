@@ -71,6 +71,10 @@ const Contacto = () => {
     }
   };
 
+  const whatsappNumber = "573122111098"; // El número sin el '+'
+  const whatsappMessage = encodeURIComponent("¡Hola! Me gustaría hacer una consulta."); // Mensaje predeterminado, codificado para URL
+
+
   return (
     <section className="container my-5">
       <h2 className="text-center mb-4" id="title" data-aos="fade-down">
@@ -223,7 +227,12 @@ const Contacto = () => {
               <a href="#" className="text-decoration-none">
                 <i className="bi bi-instagram fs-2 text-warning"></i>
               </a>
-              <a href="#" className="text-decoration-none">
+              <a
+                href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
+                className="text-decoration-none"
+                target="_blank" // Abre el enlace en una nueva pestaña
+                rel="noopener noreferrer" // Mejora la seguridad al abrir en nueva pestaña
+              >
                 <i className="bi bi-whatsapp fs-2 text-warning"></i>
               </a>
             </div>

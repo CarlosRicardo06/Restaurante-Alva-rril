@@ -25,15 +25,16 @@ const Ubicacion = () => {
       mapRef.current = map;
 
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
       L.marker(restauranteCoords)
         .addTo(map)
-        .bindPopup("Asados Alva-rril<br>¡Aquí te esperamos!")
+        .bindPopup("Asados Alva-rril<br> Calle #11, Carrera 9, Puerto Libertador, Córdoba")
         .openPopup();
     }
-    
+
     return () => {
       if (mapRef.current) {
         mapRef.current.remove();
@@ -51,9 +52,8 @@ const Ubicacion = () => {
       mapRef.current.removeControl(routingControlRef.current);
       routingControlRef.current = null;
     }
-    
+
     if (!navigator.geolocation) {
-      // Este mensaje es importante, podría ser el problema
       console.error("Error: El navegador no soporta la geolocalización.");
       alert("Tu navegador no soporta la geolocalización.");
       return;
@@ -64,7 +64,10 @@ const Ubicacion = () => {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const userCoords = [position.coords.latitude, position.coords.longitude];
+        const userCoords = [
+          position.coords.latitude,
+          position.coords.longitude,
+        ];
         // 3. Mensaje si la ubicación se obtiene con éxito
         console.log("Ubicación obtenida:", userCoords);
 
@@ -72,16 +75,12 @@ const Ubicacion = () => {
         console.log("Creando el control de la ruta...");
 
         const routingControl = L.Routing.control({
-          waypoints: [
-            L.latLng(userCoords),
-            L.latLng(restauranteCoords)
-          ],
+          waypoints: [L.latLng(userCoords), L.latLng(restauranteCoords)],
           routeWhileDragging: true,
-          language: 'es',
+          language: "es",
           lineOptions: {
-             styles: [{color: '#ffc107', opacity: 0.8, weight: 6}]
+            styles: [{ color: "#ffc107", opacity: 0.8, weight: 6 }],
           },
-          // Eliminamos las opciones 'geocoder' y 'createMarker' que podrían estar causando el error
         }).addTo(mapRef.current);
 
         console.log("Control de ruta añadido al mapa.");
@@ -92,11 +91,13 @@ const Ubicacion = () => {
         console.error("Error al obtener la ubicación: ", error);
         let errorMessage = "No se pudo obtener tu ubicación.";
         if (error.code === 1) {
-          errorMessage = "Permiso denegado. Por favor, habilita el permiso de ubicación para trazar la ruta.";
+          errorMessage =
+            "Permiso denegado. Por favor, habilita el permiso de ubicación para trazar la ruta.";
         } else if (error.code === 2) {
-            errorMessage = "La ubicación no está disponible en este momento.";
+          errorMessage = "La ubicación no está disponible en este momento.";
         } else if (error.code === 3) {
-            errorMessage = "Se ha agotado el tiempo de espera para obtener la ubicación.";
+          errorMessage =
+            "Se ha agotado el tiempo de espera para obtener la ubicación.";
         }
         alert(errorMessage);
       }
@@ -120,16 +121,26 @@ const Ubicacion = () => {
       </div>
 
       <div className="row text-center">
-        <div className="col-md-6 mb-3" data-aos="fade-right" data-aos-delay="100">
+        <div
+          className="col-md-6 mb-3"
+          data-aos="fade-right"
+          data-aos-delay="100"
+        >
           <h5>Dirección</h5>
           <p>
-            <i className="bi bi-geo-alt-fill text-warning"></i> Calle #11, Carrera 9, Puerto Libertador, Córdoba
+            <i className="bi bi-geo-alt-fill text-warning"></i> Calle #11,
+            Carrera 9, Puerto Libertador, Córdoba
           </p>
         </div>
-        <div className="col-md-6 mb-3" data-aos="fade-left" data-aos-delay="300">
+        <div
+          className="col-md-6 mb-3"
+          data-aos="fade-left"
+          data-aos-delay="300"
+        >
           <h5>Cómo Llegar</h5>
           <p>
-            <i className="bi bi-car-front-fill text-warning"></i> <strong>En Carro</strong>
+            <i className="bi bi-car-front-fill text-warning"></i>{" "}
+            <strong>En Carro</strong>
           </p>
         </div>
       </div>
