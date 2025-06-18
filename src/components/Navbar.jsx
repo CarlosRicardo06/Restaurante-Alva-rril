@@ -39,7 +39,7 @@ function Navbar() {
       }`}
     >
       <div className="container">
-        {/* Aquí puedes mantener el comentario así, fuera del atributo */}
+        
         <Link className="navbar-brand" to="/" onClick={closeNavbar}> 
           Asados Alva-rril
         </Link>
